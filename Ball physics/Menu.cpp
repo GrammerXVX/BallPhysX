@@ -9,21 +9,22 @@ Menu::~Menu()
 
 }
 
-void Menu::callMenu(sf::RenderWindow &window)
+void Menu::callMenu(sf::RenderWindow &window)//вызов метода меню
 {
 	
-	menuTexture1.loadFromFile("C:/Users/olegs/OneDrive/ƒокументы/GitHub/BallPhysX/images/1.png"); //указать полный путь тк чисто папку не видит
-	menuTexture2.loadFromFile("C:/Users/olegs/OneDrive/ƒокументы/GitHub/BallPhysX/images/2.png");//и меню уебанское у мен€ почему кружок посто€нно крутитс€ и € не ебу почему завтра буду фиксит
-	menuTexture3.loadFromFile("C:/Users/olegs/OneDrive/ƒокументы/GitHub/BallPhysX/images/3.png");//и подгон€ть размеры ,но хоть чето сделал
-	menuTexture4.loadFromFile("C:/Users/olegs/OneDrive/ƒокументы/GitHub/BallPhysX/images/4.png");
-	menuBackground.loadFromFile("C:/Users/olegs/OneDrive/ƒокументы/GitHub/BallPhysX/images/5.png");
+	menuTexture1.loadFromFile("F:/курсач/BallPhysX/images/1.png"); //загрузка текстур
+	menuTexture2.loadFromFile("F:/курсач/BallPhysX/images/2.png");
+	menuTexture3.loadFromFile("F:/курсач/BallPhysX/images/3.png");
+	menuTexture4.loadFromFile("F:/курсач/BallPhysX/images/4.png");
+	menuBackground.loadFromFile("F:/курсач/BallPhysX/images/background.jpg");
+	
 	sf::Sprite menu1(menuTexture1), menu2(menuTexture2), menu3(menuTexture3), menu4(menuTexture4), menuBG(menuBackground);
 	bool isMenu = 1;
 	int menuNum = 0;
-	menu1.setPosition(100, 30);
-	menu2.setPosition(100, 90);
-	menu3.setPosition(100, 150);
-	menu4.setPosition(100, 200);
+	menu1.setPosition(100, 200); //установка позиций
+	menu2.setPosition(100, 300);
+	menu3.setPosition(100, 400);
+	menu4.setPosition(100, 500);
 	menuBG.setPosition(0, 0);
 
 
@@ -39,26 +40,26 @@ void Menu::callMenu(sf::RenderWindow &window)
 		{
 			window.close();
 		}
-		menu1.setColor(sf::Color::White);
+		menu1.setColor(sf::Color::White);//сохранение оригинального цвета текстуры
 		menu2.setColor(sf::Color::White);
 		menu3.setColor(sf::Color::White);
 		menu4.setColor(sf::Color::White);
 		menuNum = 0;
-		window.clear(sf::Color(129, 181, 221));
+		window.clear(sf::Color(129, 181, 221));//ставим синий цвет на задний фон
 
-		if (sf::IntRect(100, 30, 50, 17).contains(sf::Mouse::getPosition(window))) { menu1.setColor(sf::Color::Blue); menuNum = 1; }
-		/*if (sf::IntRect(100, 90, 300, 50).contains(sf::Mouse::getPosition(window))) { menu2.setColor(sf::Color::Blue); menuNum = 2; }
-		if (sf::IntRect(100, 150, 300, 50).contains(sf::Mouse::getPosition(window))) { menu3.setColor(sf::Color::Blue); menuNum = 3; }
-		if (sf::IntRect(100, 200, 300, 50).contains(sf::Mouse::getPosition(window))) { menu4.setColor(sf::Color::Blue); menuNum = 4; }*/
+		if (sf::IntRect(105, 207, 90, 30).contains(sf::Mouse::getPosition(window))) { menu1.setColor(sf::Color::Blue); menuNum = 1; }//если наводимс€ на текстуру , то она мен€ет цвет на синий
+		if (sf::IntRect(108, 309, 80, 27).contains(sf::Mouse::getPosition(window)))  { menu2.setColor(sf::Color::Blue); menuNum = 2; }
+		if (sf::IntRect(108, 410, 80, 23).contains(sf::Mouse::getPosition(window))) { menu3.setColor(sf::Color::Blue); menuNum = 3; }
+		if (sf::IntRect(108, 500, 91, 47).contains(sf::Mouse::getPosition(window))) { menu4.setColor(sf::Color::Blue); menuNum = 4; }
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
-			if (menuNum == 1) isMenu = false;//если нажали первую кнопку, то выходим из меню 
-			if (menuNum == 2) isMenu = false; 
-			if (menuNum == 3) isMenu = false;
-			if (menuNum == 4) { window.close(); isMenu = false; }
+			if (menuNum == 1) isMenu = false;//1 уровень
+			if (menuNum == 2) isMenu = false;//2 уровень
+			if (menuNum == 3) isMenu = false;//3 уровень
+			if (menuNum == 4) { window.close(); isMenu = false; }//4 выход 
 		}
 
-		window.draw(menuBG);
+		window.draw(menuBG);//отрисовка
 		window.draw(menu1);
 		window.draw(menu2);
 		window.draw(menu3);
@@ -66,3 +67,14 @@ void Menu::callMenu(sf::RenderWindow &window)
 		window.display();
 	}
 }
+
+
+
+
+void Menu::MenuInProgress(sf::RenderWindow& window)
+{
+
+
+}
+
+

@@ -7,5 +7,6 @@ public:
 	Menu();
 	~Menu();
 	void callMenu(sf::RenderWindow &window);
+	void MenuInProgress(sf::RenderWindow &window);
 };
 
