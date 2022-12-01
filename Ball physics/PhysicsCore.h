@@ -1,5 +1,5 @@
 #pragma once
-#include"Entity.h"
+#include"Ball.h"
 #include<SFML/Graphics.hpp>
 #include<vector>
 #include<stdio.h>
@@ -7,10 +7,10 @@
 class Physics 
 {
 	private:
-		std::vector<Entity> *Objects;
+		std::vector<Ball> Objects;
 	public: 
-		Physics(std::vector<Entity>);
+		Physics(std::vector<Ball>);
 		~Physics();
-		void Processing(sf::RenderWindow);
+		void PreProcessing(sf::RenderWindow&);
 };
 

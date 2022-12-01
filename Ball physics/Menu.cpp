@@ -12,11 +12,11 @@ Menu::~Menu()
 void Menu::callMenu(sf::RenderWindow &window)//вызов метода меню
 {
 	
-	menuTexture1.loadFromFile("F:/курсач/BallPhysX/images/1.png"); //загрузка текстур
-	menuTexture2.loadFromFile("F:/курсач/BallPhysX/images/2.png");
-	menuTexture3.loadFromFile("F:/курсач/BallPhysX/images/3.png");
-	menuTexture4.loadFromFile("F:/курсач/BallPhysX/images/4.png");
-	menuBackground.loadFromFile("F:/курсач/BallPhysX/images/background.jpg");
+	menuTexture1.loadFromFile("images/1.png"); //загрузка текстур
+	menuTexture2.loadFromFile("images/2.png");
+	menuTexture3.loadFromFile("images/3.png");
+	menuTexture4.loadFromFile("images/4.png");
+	menuBackground.loadFromFile("images/background.jpg");
 	
 	sf::Sprite menu1(menuTexture1), menu2(menuTexture2), menu3(menuTexture3), menu4(menuTexture4), menuBG(menuBackground);
 	bool isMenu = 1;
