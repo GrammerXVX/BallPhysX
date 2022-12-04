@@ -1,8 +1,8 @@
 #include "Menu.h"
-
+#include <iostream>
 Menu::Menu()
 {
-
+	
 }
 Menu::~Menu()
 {
@@ -11,16 +11,15 @@ Menu::~Menu()
 
 void Menu::callMenu(sf::RenderWindow &window)//вызов метода меню
 {
-	
-	menuTexture1.loadFromFile("images/1.png"); //загрузка текстур
+	bool isMenu = 1;
+
+	menuTexture1.loadFromFile("images/1.png");
 	menuTexture2.loadFromFile("images/2.png");
 	menuTexture3.loadFromFile("images/3.png");
-	menuTexture4.loadFromFile("images/4.png");
+	menuTexture4.loadFromFile("images/4.png"); 
 	menuBackground.loadFromFile("images/background.jpg");
-	
-	sf::Sprite menu1(menuTexture1), menu2(menuTexture2), menu3(menuTexture3), menu4(menuTexture4), menuBG(menuBackground);
-	bool isMenu = 1;
-	menu1.setPosition(100, 200); //установка позиций
+	sf::Sprite menu1(menuTexture1),menu2(menuTexture2),menu3(menuTexture3),menu4(menuTexture4), menuBG(menuBackground);
+	menu1.setPosition(100, 200);
 	menu2.setPosition(100, 300);
 	menu3.setPosition(100, 400);
 	menu4.setPosition(100, 500);
@@ -35,7 +34,7 @@ void Menu::callMenu(sf::RenderWindow &window)//вызов метода меню
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
-		menu1.setColor(sf::Color::White);//сохранение оригинального цвета текстуры
+		menu1.setColor(sf::Color::White);
 		menu2.setColor(sf::Color::White);
 		menu3.setColor(sf::Color::White);
 		menu4.setColor(sf::Color::White);
@@ -65,7 +64,6 @@ void Menu::callMenu(sf::RenderWindow &window)//вызов метода меню
 				window.close(); isMenu = false;
 			}//4 выход 
 		}
-
 		window.draw(menuBG);//отрисовка
 		window.draw(menu1);
 		window.draw(menu2);
@@ -78,25 +76,42 @@ void Menu::callMenu(sf::RenderWindow &window)//вызов метода меню
 
 
 
-void Menu::MenuInProgress(sf::RenderWindow& window,int menuNum)
+void Menu::MenuInProgress(sf::RenderWindow& window, int menuNum)
 {
-	
+	int counter = 0;
 	if (menuNum == 1)//если земля
 	{
-		background.loadFromFile("F:/курсач/BallPhysX/images/bg1.jpg");
+		background.loadFromFile("images/bg1.jpg");
 	}
 	else if (menuNum == 2)//марс
 	{
-		background.loadFromFile("F:/курсач/BallPhysX/images/bg2.jpg");
+		background.loadFromFile("images/bg2.jpg");
 	}
 	else//луна
 	{
-		background.loadFromFile("F:/курсач/BallPhysX/images/bg3.jpg");
+		background.loadFromFile("images/bg3.jpg");
 	}
-	sf::Sprite background(background);
+	menuChoose1.loadFromFile("images/1.png");
+	menuChoose2.loadFromFile("images/2.png");
+	sf::Sprite background(background), Choose1(menuChoose1),Choose2(menuChoose2);
+	sf::Color col1 = sf::Color(255, 0, 255);
+	sf::Color col2 = sf::Color(255, 255, 0);
+	int i = 0;
+	std::vector<Ball> Objects = { Ball(window.getSize().x / 4.f, window.getSize().y / 2.f, 50.f, col1),
+								  Ball(window.getSize().x / 4.f, window.getSize().y / 2.f, 50.f, col1),
+								  Ball(window.getSize().x / 4.f, window.getSize().y / 2.f, 50.f, col1),
+								};
+	Physics a = Physics(Objects);
+	Choose1.setPosition(100, 200);
+	Choose2.setPosition(100, 300);
 	background.setPosition(0,0);//установка бекграунда
 	while (window.isOpen())
 	{
+		if (counter > 0 )
+		{
+			counter--;
+		}
+		int choose = 0;
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
@@ -107,12 +122,49 @@ void Menu::MenuInProgress(sf::RenderWindow& window,int menuNum)
 		{
 			return;
 		}
+		Choose1.setColor(sf::Color::White);
+		Choose2.setColor(sf::Color::White);
+		if (sf::IntRect(105, 207, 90, 30).contains(sf::Mouse::getPosition(window))) { Choose1.setColor(sf::Color::Blue); choose = 1; }
+		if (sf::IntRect(108, 309, 80, 27).contains(sf::Mouse::getPosition(window))) { Choose2.setColor(sf::Color::Blue); choose = 2; }
+		if (counter == 0 )
+		{
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			{
+				if (choose == 1)
+				{
+					push(a, window, col2);
+					counter = 20;
+				}
+				if (choose == 2)
+				{
+					pop(a);
+					counter = 20;
+				}
+			}
+		}
 		
 		window.clear(sf::Color(129, 181, 221));//очистка экрана
 		window.draw(background);//отрисовка
+		a.PreProcessing(window);
+		window.draw(Choose1);
+		window.draw(Choose2);
 		window.display();//
+		std::cout << counter<<std::endl;
 	}
 
 }
 
+
+
+void Menu::push(Physics &a,sf::RenderWindow &window, sf::Color col2)
+{
+	
+	a.AddObject(Ball(window.getSize().x / 4.f, window.getSize().y / 2.f, 50.f, col2));
+
+	return;
+}
+void Menu::pop(Physics& a)
+{
+	a.PopObject();
+}
 
