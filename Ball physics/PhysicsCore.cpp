@@ -146,18 +146,17 @@ void Physics::PreProcessing(sf::RenderWindow& window) {
             Vn1 = o;
             if (!Objects.at(i).isMove)
             {
-                Objects.at(CurrentObject).velocity.x = Vn1 * s - Vt1 * e;
-                Objects.at(CurrentObject).velocity.y = Vn1 * e + Vt1 * s;
-                Objects.at(i).posX += Objects.at(i).velocity.x * dt;
-                Objects.at(i).posY += Objects.at(i).velocity.y * dt;
-            }
-            if (!Objects.at(CurrentObject).isMove)
-            {
                 Objects.at(i).velocity.x = Vn2 * s - Vt2 * e;
                 Objects.at(i).velocity.y = Vn2 * e + Vt2 * s;
                 Objects.at(CurrentObject).posX += Objects.at(CurrentObject).velocity.x * dt;
                 Objects.at(CurrentObject).posY += Objects.at(CurrentObject).velocity.y * dt;
-                
+            }
+            if (!Objects.at(CurrentObject).isMove)
+            {
+                Objects.at(CurrentObject).velocity.x = Vn1 * s - Vt1 * e;
+                Objects.at(CurrentObject).velocity.y = Vn1 * e + Vt1 * s;
+                Objects.at(i).posX += Objects.at(i).velocity.x * dt;
+                Objects.at(i).posY += Objects.at(i).velocity.y * dt;
             }
         }
         Objects.at(i).Update();
