@@ -8,8 +8,10 @@ class Physics
 {
 	private:
 		std::vector<Ball> Objects;
+		const float gravity = 1;
+		int groundHeight;
 	public: 
-		Physics(std::vector<Ball>);
+		Physics(std::vector<Ball>, sf::RenderWindow&);
 		~Physics();
 		void PreProcessing(sf::RenderWindow&);
 };

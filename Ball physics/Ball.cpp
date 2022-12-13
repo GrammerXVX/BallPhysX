@@ -5,6 +5,7 @@ Ball::Ball(float posX, float posY, float Radius, sf::Color color) {
 	this->posX = posX;
 	this->posY = posY;
 	this->Color = color;
+	this->velocity = sf::Vector2f(0,0);
 }
 
 Ball::Ball(float posX, float posY, float Radius, int Red, int Green, int Blue) {
@@ -12,6 +13,7 @@ Ball::Ball(float posX, float posY, float Radius, int Red, int Green, int Blue) {
 	this->posX = posX;
 	this->posY = posY;
 	this->Color = sf::Color(Red, Green, Blue);
+	this->velocity = sf::Vector2f(0, 0);
 }
 void Ball::Update(float NewPosX, float NewPosY) 
 {
@@ -30,6 +32,6 @@ void Ball::Update()
 }
 void Ball::SetAcceleration() {
 	//srand(time(0));
-	dx = 1+rand() % 10;
-	dy = 1+rand() % 10;
+	velocity.x = 1+rand() % 10;
+	velocity.y = 1+rand() % 10;
 }
